@@ -7,7 +7,9 @@ module PicasaDownloader
     before :each do
       VCR.use_cassette("google-login") do
         @client = Client.new(EnvCredentials.new)
-        @dir = ENV['TMPDIR'] + 'picasa-downloader-test'
+        tempdir = ENV['TMPDIR']
+        tempdir = '' unless tempdir
+        @dir = tempdir + 'picasa-downloader-test'
       end
     end
 
