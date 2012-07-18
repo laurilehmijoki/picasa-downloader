@@ -1,7 +1,5 @@
 # TODO
 
-* Gem
-* Ruby 1.8 support
-* Travis
+* publish Gem
 * README.md
 * Video download
