@@ -22,3 +22,7 @@ Set your Google credentials as environmental values:
 Download all Picasa albums:
 
 `picasa-downloader all`
+
+## License
+
+MIT
