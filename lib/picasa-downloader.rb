@@ -1,0 +1,7 @@
+require 'rubygems'
+require 'require_all'
+require_all 'lib'
+require 'gdata'
+require 'nokogiri'
+require 'net/http'
+require 'uri'

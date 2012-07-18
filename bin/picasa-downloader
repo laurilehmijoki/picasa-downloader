@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+require_relative '../lib/picasa-downloader'
+require 'gli'
+
+include GLI
+
+default_download_dir=ENV['HOME'] + '/Picasa-albums'
+
+program_desc 'Picasa downloader'
+
+desc 'Download all albums'
+long_desc "Download all Picasa albums into #{default_download_dir}"
+command [:all] do |c|
+  c.action do |global_options,options,args|
+    credentials = PicasaDownloader::EnvCredentials.new
+    raise PicasaDownloader::EnvironmentalCredentialsNotSet unless
+      credentials.is_configured?
+    puts "Authenticating..."
+    client = PicasaDownloader::Client.new(credentials)
+    puts "Fetching the album list..."
+    albums = client.list_albums
+    puts "Downloading #{albums.length} albums into #{default_download_dir}..."
+    albums.each { |album|
+      puts "  downloading #{album.title}..."
+      PicasaDownloader::AlbumPersister.
+        new(client, album, default_download_dir).download
+    }
+  end
+end
+
+exit GLI.run(ARGV)
