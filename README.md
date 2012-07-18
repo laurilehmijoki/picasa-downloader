@@ -14,6 +14,7 @@ With this tool you can download your Picasa albums.
 Set your Google credentials as environmental values:
 
 `export PICASA_USERNAME="your.gmail.account"`
+
 `export PICASA_PASSWORD="yourpass"`
 
 ## Usage
