@@ -1,5 +1,5 @@
 require 'vcr'
-require_relative 'vcr_helper'
+require_relative 'test_helper'
 require_relative '../lib/picasa-downloader'
 
 module PicasaDownloader

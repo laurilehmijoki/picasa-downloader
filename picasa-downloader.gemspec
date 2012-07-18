@@ -13,8 +13,14 @@ Gem::Specification.new do |s|
   s.homepage      = 'https://github.com/laurilehmijoki/picasa-downloader'
 
   s.add_dependency 'require_all'
-  s.add_dependency 'gdata_19'
+  if RUBY_VERSION < "1.9"
+    s.add_dependency 'gdata'
+    s.add_dependency 'require_relative'
+  else
+    s.add_dependency 'gdata_19'
+  end
   s.add_dependency 'nokogiri'
+  s.add_dependency 'gli'
 
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'vcr'
