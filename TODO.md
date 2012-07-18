@@ -1,6 +1,7 @@
 # TODO
 
-* CLI
-* Anonymize fixture data
-* Video download
+* Gem
 * Ruby 1.8 support
+* Travis
+* README.md
+* Video download
