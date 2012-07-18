@@ -15,10 +15,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'require_all'
   if RUBY_VERSION < "1.9"
     s.add_dependency 'gdata'
-    s.add_dependency 'require_relative'
   else
     s.add_dependency 'gdata_19'
   end
+  s.add_dependency 'require_relative'
   s.add_dependency 'nokogiri'
   s.add_dependency 'gli'
   s.add_dependency 'rake'
