@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'require_all'
+require 'fileutils'
 require_all 'lib'
 require 'gdata'
 require 'nokogiri'
