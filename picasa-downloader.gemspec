@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   end
   s.add_dependency 'nokogiri'
   s.add_dependency 'gli'
+  s.add_dependency 'rake'
 
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'vcr'
