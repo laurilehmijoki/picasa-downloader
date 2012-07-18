@@ -23,6 +23,12 @@ Download all Picasa albums:
 
 `picasa-downloader all`
 
+## Development
+
+Run tests:
+
+`rake test`
+
 ## License
 
 MIT
