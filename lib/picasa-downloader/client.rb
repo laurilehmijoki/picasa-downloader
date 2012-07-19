@@ -22,7 +22,7 @@ module PicasaDownloader
         Photo.new(
           e.xpath("group/content/@url").to_s,
           # Google includes the milliseconds in the timestamp:
-          e.css("tags time").inner_text.to_i / 1000,
+          e.css("timestamp").inner_text.to_i / 1000,
           e.css("size").inner_text.to_i,
           e.css("title").first.inner_text)
       }
