@@ -21,7 +21,7 @@ module PicasaDownloader
       with_cassettes {
         @albums = @client.list_albums
         AlbumPersister.new(@client, @albums.first, @dir).download
-        File.exists?(@dir + "/#{@albums.first.title}")
+        File.exists?(@dir + "/2012/#{@albums.first.title}").should be true
       }
     end
 
@@ -29,7 +29,7 @@ module PicasaDownloader
       with_cassettes {
         @albums = @client.list_albums
         AlbumPersister.new(@client, @albums.first, @dir).download
-        Dir.entries(@dir + "/#{@albums.first.title}/").any? { |file|
+        Dir.entries(@dir + "/2012/#{@albums.first.title}/").any? { |file|
           file.downcase.match(/jp(e)?g/)
         }.should be true
       }
