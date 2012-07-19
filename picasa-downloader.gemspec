@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.authors       = ['Lauri Lehmijoki']
   s.email         = 'lauri.lehmijoki@iki.fi'
   s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- {spec,fixtures}/*`.split("\n")
   s.require_paths = ['lib']
   s.executables   << 'picasa-downloader'
   s.homepage      = 'https://github.com/laurilehmijoki/picasa-downloader'
