@@ -24,7 +24,7 @@ module PicasaDownloader
           # Google includes the milliseconds in the timestamp:
           e.css("tags time").inner_text.to_i / 1000,
           e.css("size").inner_text.to_i,
-          e.css("title").inner_text)
+          e.css("title").first.inner_text)
       }
     end
 
