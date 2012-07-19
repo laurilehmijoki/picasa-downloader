@@ -13,6 +13,7 @@ module PicasaDownloader
         if photo_data
           File.open(get_album_dir + photo.name, 'wb') { |file|
             file.write(photo_data)
+            FileUtils.touch(file.path, :mtime => photo.created_date)
           }
         end
       }
