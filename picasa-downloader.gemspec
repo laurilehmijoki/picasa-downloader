@@ -13,7 +13,6 @@ Gem::Specification.new do |s|
   s.executables   << 'picasa-downloader'
   s.homepage      = 'https://github.com/laurilehmijoki/picasa-downloader'
 
-  s.add_dependency 'require_all'
   if RUBY_VERSION < "1.9"
     s.add_dependency 'gdata'
   else
