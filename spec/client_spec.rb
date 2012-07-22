@@ -36,13 +36,13 @@ module PicasaDownloader
 
     it "downloads photos photos of an album" do
       with_cassettes {
-        @albums = @client.list_albums
-        @photos = @client.list_photos(@albums.first.id)
+        albums = @client.list_albums
+        photos = @client.list_photos(albums.first.id)
         def jpeg?(data)
           # See http://www.astro.keele.ac.uk/oldusers/rno/Computing/File_magic.html
           return data[0, 4] == "\xff\xd8\xff\xe0"
         end
-        bytes = @client.download_photo(@photos.first)
+        bytes = @client.download_photo(photos.first)
         jpeg?(bytes).should be true
       }
     end
