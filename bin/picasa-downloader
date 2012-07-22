@@ -6,28 +6,58 @@ require 'gli'
 
 include GLI
 
-default_download_dir=ENV['HOME'] + '/Picasa-albums'
+@default_download_dir=ENV['HOME'] + '/Picasa-albums'
 
 program_desc 'Picasa downloader'
 
 desc 'Download all albums'
-long_desc "Download all Picasa albums into #{default_download_dir}"
+long_desc "Download all Picasa albums into #{@default_download_dir}"
 command [:all] do |c|
   c.action do |global_options,options,args|
+    client = authenticate
+    albums = list_albums(client)
+    puts "Downloading #{albums.length} albums into #{@default_download_dir}..."
+    albums.each { |album|
+      download(album, client)
+    }
+  end
+end
+
+desc 'Download one album'
+command [:album] do |c|
+  c.action do |global_options,options,args|
+    if args.length == 0
+      raise PicasaDownloader::AlbumNameNotSpecified
+    end
+    album_regex = args[0]
+    client = authenticate
+    albums = list_albums(client)
+    albums_to_download = albums.select { |album|
+      album.title.match(album_regex)
+    }
+    albums_to_download.each { |album|
+      download(album, client)
+    }
+  end
+end
+
+def download(album, client)
+  puts "  downloading #{album.title}..."
+  PicasaDownloader::AlbumPersister.
+    new(client, album, @default_download_dir).download
+end
+
+def authenticate
     credentials = PicasaDownloader::EnvCredentials.new
     raise PicasaDownloader::EnvironmentalCredentialsNotSet unless
       credentials.is_configured?
     puts "Authenticating..."
     client = PicasaDownloader::Client.new(credentials)
+end
+
+def list_albums(client)
     puts "Fetching the album list..."
     albums = client.list_albums
-    puts "Downloading #{albums.length} albums into #{default_download_dir}..."
-    albums.each { |album|
-      puts "  downloading #{album.title}..."
-      PicasaDownloader::AlbumPersister.
-        new(client, album, default_download_dir).download
-    }
-  end
 end
 
 exit GLI.run(ARGV)
