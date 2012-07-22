@@ -19,10 +19,12 @@ module PicasaDownloader
       doc = to_xml(
         "https://picasaweb.google.com/data/feed/api/user/default/albumid/#{album_id}?imgmax=d")
       doc.css("entry").map { |e|
+        timestamp = e.css("tags time")
+        timestamp = e.css("timestamp") unless timestamp
         Photo.new(
           e.xpath("group/content/@url").to_s,
           # Google includes the milliseconds in the timestamp:
-          e.css("timestamp").inner_text.to_i / 1000,
+          timestamp.inner_text.to_i / 1000,
           e.css("size").inner_text.to_i,
           e.css("title").first.inner_text)
       }
