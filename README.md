@@ -23,6 +23,10 @@ Download all Picasa albums:
 
 `picasa-downloader all`
 
+Download a particular album:
+
+`picasa-downloader album "my album's name"`
+
 ## Development
 
 Run tests:
