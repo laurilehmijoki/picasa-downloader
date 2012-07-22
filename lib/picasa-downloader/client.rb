@@ -29,19 +29,37 @@ module PicasaDownloader
     end
 
     def download_photo(photo)
-      unless photo.url.include?"googlevideo"
-        uri = URI.parse(photo.url)
-        http = Net::HTTP.new(uri.host, uri.port)
-        request = Net::HTTP::Get.new(uri.request_uri)
-        http.use_ssl = true
-        response = http.request(request)
-        raise "Response not ok, was #{response.code}" unless
-        response.code.to_i.between? 200, 299
-        response.body
+      if photo.has_video?
+        # Downloading videos is not supported yet
+      else
+        with_retry {
+          uri = URI.parse(photo.url)
+          http = Net::HTTP.new(uri.host, uri.port)
+          request = Net::HTTP::Get.new(uri.request_uri)
+          http.use_ssl = true
+          response = http.request(request)
+          raise "Response not ok, was #{response.code}" unless
+            response.code.to_i.between? 200, 299
+          response.body
+        }
       end
     end
 
     private
+
+    def with_retry
+      retries = [3, 5]
+      begin
+        yield
+      rescue Exception
+        if delay = retries.shift
+          sleep delay
+          retry
+        else
+          raise
+        end
+      end
+    end
 
     def to_xml(gdata_url)
       response = @gd.get(gdata_url)

@@ -8,5 +8,9 @@ module PicasaDownloader
       @size = size
       @name = name
     end
+
+    def has_video?
+      @url.include?'googlevideo'
+    end
   end
 end
