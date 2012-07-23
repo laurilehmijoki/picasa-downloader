@@ -1,6 +1,4 @@
-require 'vcr'
 require 'test_helper'
-require_relative '../lib/picasa-downloader'
 
 module PicasaDownloader
   describe AlbumPersister do

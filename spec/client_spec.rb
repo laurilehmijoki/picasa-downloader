@@ -1,6 +1,4 @@
-require 'vcr'
-require_relative 'test_helper'
-require_relative '../lib/picasa-downloader'
+require 'test_helper'
 
 module PicasaDownloader
   describe Client do
