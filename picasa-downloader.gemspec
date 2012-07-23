@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = 'picasa-downloader'
-  s.version       = '0.0.4'
+  s.version       = '0.0.5'
   s.license       = 'MIT'
   s.summary       = 'Download your Google Picasa photo albums'
   s.description   =
